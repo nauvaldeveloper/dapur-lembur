@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dapur Lembur — Rumah Makan Sunda di Bandung</title>
+  <meta name="description" content="Masakan Sunda rumahan dan kopi Jawa Barat di Cigadung, Bandung. Lihat menu, pesan dari meja, bawa pulang, atau reservasi saung lesehan lewat WhatsApp." />
+  <meta name="theme-color" content="#2d4a2b" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232d4a2b'/%3E%3Cpath d='M14 40h36l-4 10H18Z' fill='%23f3e9d2'/%3E%3Cpath d='M22 34c0-8 20-8 20 0' stroke='%23c2412d' stroke-width='5' fill='none'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Karla:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div class="demo-bar" id="demoBar" hidden>Website concept by Nauval Dev · rumah makan &amp; menu fiktif · <a id="demoLink" target="_blank" rel="noopener">Hubungi</a> · <a href="?meja=12">coba mode pesan dari meja</a></div>
+
+  <div class="tablebar" id="tableBar" hidden>
+    <span>Kamu di <b id="tableNo"></b>. Pilih menu, lalu kirim pesanan ke kasir.</span>
+    <a href="./" class="tablebar__x">Keluar mode meja</a>
+  </div>
+
+  <header class="nav">
+    <div class="wrap nav__in">
+      <a href="#top" class="brand" aria-label="Dapur Lembur, ke atas">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 25h28l-3 7H9Z"/><path d="M13 21c0-6 14-6 14 0" class="steam"/></svg>
+        <span>Dapur Lembur</span>
+      </a>
+      <nav class="nav__links" aria-label="Navigasi"><a href="#menu">Menu</a><a href="#reservasi">Reservasi</a><a href="#kunjungi">Lokasi</a></nav>
+      <button class="bag" id="bagBtn" type="button" aria-label="Lihat pesanan"><span>Pesanan</span><b id="bagCount">0</b></button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <img class="hero__img" src="assets/img/hero-sambal.webp" alt="Sambal merah di atas daun pisang dan cobek batu" width="1600" height="900" fetchpriority="high" />
+      <div class="wrap hero__in">
+        <p class="eyebrow">Rumah makan Sunda · Cigadung, Bandung</p>
+        <h1>Sambal diulek saat dipesan, nasi masih ngebul.</h1>
+        <p class="lead">Masakan rumahan Sunda, saung lesehan di atas kolam, dan kopi dari kebun Jawa Barat.</p>
+        <div class="hero__cta">
+          <a href="#menu" class="btn btn--red">Lihat menu</a>
+          <a href="#reservasi" class="btn btn--cream">Reservasi saung</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="strip">
+      <div class="wrap strip__in">
+        <div><b id="openState">—</b><span id="openHours"></span></div>
+        <div><b>Bawa pulang &amp; pesan antar</b><span>Kurir resto radius 5 km</span></div>
+        <div><b>Halal</b><span>Tanpa babi &amp; alkohol</span></div>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section class="menu" id="menu">
+      <div class="wrap">
+        <div class="menu__head">
+          <div><p class="eyebrow eyebrow--red">Daftar menu</p><h2>Menu Dapur Lembur</h2></div>
+          <div class="tools">
+            <label class="search"><span class="sr">Cari menu</span><input id="q" type="search" placeholder="Cari: pepes, sambal, kopi…" autocomplete="off" /></label>
+            <div class="toggles" role="group" aria-label="Saring menu">
+              <button type="button" data-flag="best" aria-pressed="false">Paling laris</button>
+              <button type="button" data-flag="veg" aria-pressed="false">Tanpa daging</button>
+              <button type="button" data-flag="mild" aria-pressed="false">Tidak pedas</button>
+            </div>
+          </div>
+        </div>
+        <nav class="cats" id="cats" aria-label="Kategori menu"></nav>
+        <div class="sheet" id="sheet" aria-live="polite"></div>
+        <p class="legend">Cabai = tingkat pedas · ⓥ tanpa daging/ikan · ★ paling laris · harga belum termasuk PB1 10%</p>
+      </div>
+    </section>
+
+    <!-- RESERVATION -->
+    <section class="resv" id="reservasi">
+      <div class="wrap resv__in">
+        <div class="resv__intro">
+          <p class="eyebrow">Reservasi meja</p>
+          <h2>Pesan saung untuk makan bareng</h2>
+          <p>Pilih tanggal, jam, dan area. Kalau datang rombongan, sekalian pesan paket liwet supaya sudah siap begitu kalian duduk.</p>
+          <img src="assets/img/nasi-rames.webp" alt="Sepiring nasi dengan lauk, sambal, dan tumis sayur" width="1200" height="902" loading="lazy" />
+        </div>
+        <form class="resv__form" id="resvForm" novalidate>
+          <div class="two">
+            <label class="field">Tanggal<select id="r-date"></select></label>
+            <label class="field">Jumlah orang<input id="r-pax" type="number" min="1" max="30" value="4" /></label>
+          </div>
+          <div class="field"><span>Jam</span><div class="times" id="times"></div></div>
+          <div class="field"><span>Area</span><div class="areas" id="areas"></div></div>
+          <div class="two">
+            <label class="field">Acara<select id="r-occ"></select></label>
+            <label class="field">Siapkan paket liwet?<select id="r-liwet"><option value="">Tidak, pesan di tempat</option></select></label>
+          </div>
+          <div class="two">
+            <label class="field">Nama<input id="r-name" autocomplete="name" /></label>
+            <label class="field">No. WhatsApp<input id="r-wa" inputmode="tel" autocomplete="tel" placeholder="08xx" /></label>
+          </div>
+          <label class="field">Catatan (opsional)<input id="r-note" placeholder="Mis. butuh kursi bayi, kue ulang tahun dibawa sendiri" /></label>
+          <p class="err" id="rErr" hidden></p>
+          <button class="btn btn--red btn--block" type="submit">Kirim reservasi via WhatsApp</button>
+          <p class="fine">Meja ditahan 15 menit dari jam reservasi. Admin akan mengonfirmasi lewat WhatsApp.</p>
+          <div id="rPreview"></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- VISIT -->
+    <section class="visit" id="kunjungi">
+      <div class="wrap visit__in">
+        <div>
+          <p class="eyebrow eyebrow--red">Kunjungi kami</p>
+          <h2>Dapur Lembur Cigadung</h2>
+          <dl class="info">
+            <div><dt>Alamat</dt><dd id="vAddr"></dd></div>
+            <div><dt>Jam buka</dt><dd id="vHours"></dd></div>
+            <div><dt>Fasilitas</dt><dd>Parkir 20 mobil · musala · area bermain anak · Wi-Fi</dd></div>
+          </dl>
+        </div>
+        <div class="faq" id="faqList"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot"><div class="wrap foot__in"><b>Dapur Lembur</b><span>Foto: “Sambal Onion Spicy Chilli” oleh Bajinra dan nasi dengan sambal kerang oleh Wiki Farazi (CC0, Wikimedia Commons).</span></div></footer>
+
+  <!-- ORDER DRAWER -->
+  <div class="layer" id="layer" hidden>
+    <div class="layer__bg" data-close></div>
+    <aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="drTitle">
+      <div class="drawer__head"><h2 id="drTitle">Pesanan</h2><button class="x" type="button" data-close aria-label="Tutup">×</button></div>
+      <div class="drawer__body" id="drBody"></div>
+      <div class="drawer__foot" id="drFoot"></div>
+    </aside>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
